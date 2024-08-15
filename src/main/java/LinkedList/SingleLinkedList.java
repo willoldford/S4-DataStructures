@@ -87,5 +87,37 @@ public class SingleLinkedList {
     //1. deleting at the begining
     //2. deleting at the ending
     //3. deleting anywhere in the list
+    public void deleteNode(int location) {
+        if (head == null) {
+            System.out.println("The SLL does not exist");
+            return;
+        } else if (location == 0) { // Deleting the first node
+            head = head.next;
+            size--;
+            if (size == 0) {
+                tail = null;
+            }
+        } else if (location >= size - 1) { // Deleting the last node
+            Node tempNode = head;
+            for (int i = 0; i < size - 2; i++) {
+                tempNode = tempNode.next;
+            }
+            if (tempNode == head) { 
+                head = tail = null;
+                size--;
+                return;
+            }
+            tempNode.next = null;
+            tail = tempNode;
+            size--;
+        } else { // Deleting a node from the middle
+            Node tempNode = head;
+            for (int i = 0; i < location - 1; i++) {
+                tempNode = tempNode.next;
+            }
+            tempNode.next = tempNode.next.next;
+            size--;
+        }
+    }
 
 }
